@@ -15,7 +15,7 @@ parser.add_argument('data')
 class IrisClassifier(Resource):
     def post(self):
         args = parser.parse_args()
-        X = np.array(json.loads(args['data']))
+        X = json.loads(args['data'])
         prediction = model.predict(X)
         return jsonify(prediction.tolist())
 
