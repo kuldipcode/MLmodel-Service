@@ -12,14 +12,15 @@ parser = reqparse.RequestParser()
 parser.add_argument('data')
 
 # Define how the api will respond to the post requests
-class IrisClassifier(Resource):
+class ArcClassifier(Resource):
     def post(self):
         args = parser.parse_args()
-        X = json.loads(args['data'])
+        X = np.array(json.loads(args['data']))
+        print(X)
         prediction = model.predict(X)
         return jsonify(prediction.tolist())
 
-api.add_resource(IrisClassifier, '/iris')
+api.add_resource(ArcClassifier, '/arc')
 
 if __name__ == 'api':
     # Load model
